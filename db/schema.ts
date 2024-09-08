@@ -51,7 +51,7 @@ export const lessons = pgTable("lessons", {
   order: integer("order").notNull(),
 });
 
-export const lessonRelations = relations(lessons, ({ one, many }) => ({
+export const lessonsRelations = relations(lessons, ({ one, many }) => ({
   // lessons 表中的每一条记录（课程）都与 units 表中的一条记录（单元）相关联，是一个 多对一 的关系
   unit: one(units, {
     fields: [lessons.unitId],
