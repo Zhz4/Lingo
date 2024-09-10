@@ -192,13 +192,11 @@ export const getLessonPercentage = cache(async () => {
   }
 
   const lesson = await getLesson(courseProgress.activeLessonId);
-
   if (!lesson) {
     return 0;
   }
-
   const completedChallenges = lesson.challenges.filter((challenge) => {
-    challenge.completed;
+    return challenge.completed === true;
   });
   const percentage = Math.floor(
     (completedChallenges.length / lesson.challenges.length) * 100

@@ -29,7 +29,7 @@ const Challenge = ({
       )}
     >
       {options.map((option, i) => (
-        <div>
+        <div key={option.id}>
           <Card
             key={option.id}
             id={option.id}

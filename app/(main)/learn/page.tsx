@@ -26,11 +26,10 @@ const LearnPage = async () => {
       courseProgressData,
       lessonPercentageData,
     ]);
-
   if (!userProgress || !userProgress.activeCourse) {
     redirect("/courses");
   }
-  if (!courseProgress || !courseProgress.activeLesson) {
+  if (!courseProgress) {
     redirect("/courses");
   }
 
@@ -55,9 +54,12 @@ const LearnPage = async () => {
               title={unit.title}
               lessons={unit.lessons}
               activeLesson={
-                courseProgress.activeLesson as typeof lessons.$inferSelect & {
-                  units: typeof unitsSchema.$inferSelect;
-                } | undefined }
+                courseProgress.activeLesson as
+                  | (typeof lessons.$inferSelect & {
+                      units: typeof unitsSchema.$inferSelect;
+                    })
+                  | undefined
+              }
               activeLessonPercentage={lessonPercentage}
             />
           </div>
