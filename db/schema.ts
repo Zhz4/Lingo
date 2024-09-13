@@ -6,6 +6,7 @@ import {
   serial,
   text,
   boolean,
+  timestamp,
 } from "drizzle-orm/pg-core";
 
 // 课程
@@ -15,7 +16,7 @@ export const courses = pgTable("courses", {
   imageSrc: text("image_src").notNull(),
 });
 
-export const courseRelations = relations(courses, ({ many }) => ({
+export const coursesRelations = relations(courses, ({ many }) => ({
   userProgress: many(userProgress),
   units: many(units),
 }));
@@ -82,7 +83,7 @@ export const challengesRelations = relations(challenges, ({ one, many }) => ({
     references: [lessons.id],
   }),
   challengeOptions: many(challengeOptions),
-  challengeProgress:many(challengeProgress)
+  challengeProgress: many(challengeProgress),
 }));
 
 export const challengeOptions = pgTable("challenge_options", {
@@ -110,7 +111,7 @@ export const challengeOptionsRelations = relations(
 
 export const challengeProgress = pgTable("challenge_progress", {
   id: serial("id").primaryKey(),
-  userId: text("user_id").notNull(), // TODO 确认这个不会被破坏
+  userId: text("user_id").notNull(),
   challengeId: integer("challenge_id")
     .references(() => challenges.id, {
       onDelete: "cascade",
@@ -128,11 +129,6 @@ export const challengeProgressRelations = relations(
     }),
   })
 );
-
-// 定义关系,多对多,多个课程拥有多个用户进度
-export const coursesRelations = relations(courses, ({ many }) => ({
-  userProgress: many(userProgress),
-}));
 
 // 用户进度
 export const userProgress = pgTable("user_progress", {
@@ -154,3 +150,12 @@ export const userProgressRelations = relations(userProgress, ({ one }) => ({
     references: [courses.id],
   }),
 }));
+
+export const userSubscription = pgTable("user_subscription", {
+  id: serial("id").primaryKey(),
+  userId: text("user_id").notNull().unique(),
+  stripeCustomerId: text("stripe_customer_id").notNull().unique(),
+  stripeSubscriptionId: text("stripe_subscription_id").notNull().unique(),
+  stripePriceId: text("stripe_price_id").notNull().unique(),
+  stripeCurrentPeriodEnd: timestamp("stripe_current_period_end").notNull(),
+});

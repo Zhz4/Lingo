@@ -7,14 +7,14 @@ import { courses } from "@/db/schema";
 type Props = {
   activeCourse: typeof courses.$inferSelect 
   hearts: number;
-  potints: number;
+  points: number;
   hasActiveSubscription: boolean;
 };
 
 export const UserProgress = ({
   activeCourse,
   hearts,
-  potints,
+  points,
   hasActiveSubscription,
 }: Props) => {
   return (
@@ -38,7 +38,7 @@ export const UserProgress = ({
               alt="Points"
               className="mr-2"
             />
-            {potints}
+            {points}
           </Button>
         </Link>
         <Link href="/shop">
