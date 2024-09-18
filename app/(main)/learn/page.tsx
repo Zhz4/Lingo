@@ -64,6 +64,7 @@ const LearnPage = async () => {
               description={unit.description}
               title={unit.title}
               lessons={unit.lessons}
+              // @ts-ignore
               activeLesson={
                 courseProgress.activeLesson as
                   | (typeof lessons.$inferSelect & {
