@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { usePracticeModal } from "@/store/use-practice-modal";
 import { Button } from "@/components/ui/button";
@@ -15,15 +14,8 @@ import {
 import Image from "next/image";
 
 export const PracticeModal = () => {
-  const router = useRouter();
   const { isOpen, close } = usePracticeModal();
   const [isclient, setIsClient] = useState(false);
-
-  const onClick = () => {
-    close();
-    router.push("/store");
-  };
-
   // 只会在初次渲染时执行
   useEffect(() => {
     setIsClient(true);

@@ -18,8 +18,14 @@ export async function POST(req: Request) {
       signature,
       process.env.STRIPE_WEBHOOK_SECRET!
     );
-  } catch (error: any) {
-    return new NextResponse(`Webhook error ${error.message}, `, {
+  } catch (error) {
+    if (error instanceof Error) {
+      // 使用 Error 类型处理错误
+      return new NextResponse(`Webhook error: ${error.message}`, {
+        status: 400,
+      });
+    }
+    return new NextResponse(`Unexpected error`, {
       status: 400,
     });
   }

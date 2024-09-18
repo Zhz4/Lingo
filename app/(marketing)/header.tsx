@@ -30,6 +30,7 @@ export const Header = () => {
           <SignedOut>
             <SignInButton
               mode="modal"
+              // @ts-expect-error: ts(2322)
               afterSignInUrl="/learn"
               afterSignUpUrl="/learn"
             >

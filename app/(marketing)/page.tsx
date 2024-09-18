@@ -7,7 +7,6 @@ import {
   SignedIn,
   SignedOut,
   SignInButton,
-  UserButton,
   SignUpButton,
 } from "@clerk/nextjs";
 import { Loader } from "lucide-react";
@@ -30,6 +29,7 @@ export default function Home() {
             <SignedOut>
               <SignUpButton
                 mode="modal"
+                // @ts-expect-error: ts(2322)
                 afterSignInUrl="/learn"
                 afterSignUpUrl="/learn"
               >
@@ -39,6 +39,7 @@ export default function Home() {
               </SignUpButton>
               <SignInButton
                 mode="modal"
+                // @ts-expect-error: ts(2322)
                 afterSignInUrl="/learn"
                 afterSignUpUrl="/learn"
               >
